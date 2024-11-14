@@ -1,0 +1,11 @@
+task:
+  name: "Example task"
+  container:
+    image: "ubuntu:latest"
+  script: |
+    echo "Starting task..." && \
+    echo "Running step 1" && \
+    sudo apt-get update && \
+    echo "Running step 2" && \
+    sudo apt-get install -y curl && \
+    echo "Task completed."
