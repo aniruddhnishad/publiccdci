@@ -1,0 +1,8 @@
+version: 1.0.{build}
+image: Ubuntu2204
+build:
+  verbosity: minimal
+test_script:
+  - "node --version"
+  - "npm --version"
+  - "npm test"
