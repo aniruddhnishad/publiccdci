@@ -1,24 +1,25 @@
-task:
-  container:
+container:
     image: node:latest
-
-  node_modules_cache:
-    folder: node_modules
-    fingerprint_script: cat yarn.lock
-    populate_script: yarn install
-
-  matrix:
-    - name: Lint
-      lint_script: yarn run lint
-    - name: Test
-      container:
-        matrix:
-          - image: node:latest
-          - image: node:lts
-      test_script: yarn run test
-    - name: Publish
-      depends_on:
-        - Lint
-        - Test
-      only_if: $BRANCH == "master"
-      publish_script: yarn run publish
+    additional_containers:
+      - name: mysql
+        image: mysql:latest
+        port: 3306
+        cpu: 1.0
+        memory: 512Mi
+        env:
+            MYSQL_ROOT_PASSWORD: ""
+            MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+task:
+    environment:
+        TEST: ENCRYPTED[c6846581446ab06a0ca9c3163ca76b19f2e59d3c8f1946ea7ac5c3c34caf705dcea8604652d2127fae1c64d8517466ea]
+    script: 
+    - node --version
+    - echo "hello"
+    - pwd
+    - ls -la
+    - cd
+    - ls -la
+    - mkdir .ssh
+    - chmod 700 .ssh
+    - cd .ssh
+    - ls -la
